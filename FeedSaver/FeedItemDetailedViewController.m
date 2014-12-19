@@ -81,8 +81,12 @@ typedef enum {
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    //TODO: open link when clicked?
+    if(indexPath.row == LinkSection) {
+        if(self.item.link.length) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:self.item.link]];
+        }
+    }
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 
 }
 
