@@ -15,6 +15,7 @@
 		8402911E1A2DD71600AA7885 /* FeedSaverTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8402911D1A2DD71600AA7885 /* FeedSaverTests.m */; };
 		840291291A2DDF1D00AA7885 /* FeedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 840291281A2DDF1D00AA7885 /* FeedParser.m */; };
 		8402912C1A2F6C1400AA7885 /* FeedItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8402912B1A2F6C1400AA7885 /* FeedItem.m */; };
+		84AC5D3A1A431378002AE96C /* FeedItemDetailedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 84AC5D391A431378002AE96C /* FeedItemDetailedViewController.m */; };
 		84CF92631A36032F000E910F /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 84CF92621A36032F000E910F /* DBManager.m */; };
 		84CF92651A3603A8000E910F /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 84CF92641A3603A8000E910F /* libsqlite3.0.dylib */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		8402912B1A2F6C1400AA7885 /* FeedItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItem.m; sourceTree = "<group>"; };
 		84AC5D371A430D10002AE96C /* FeedItemDetailedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedItemDetailedViewController.h; sourceTree = "<group>"; };
 		84AC5D381A430FA1002AE96C /* FeedItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedItem.h; sourceTree = "<group>"; };
+		84AC5D391A431378002AE96C /* FeedItemDetailedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedItemDetailedViewController.m; sourceTree = "<group>"; };
 		84CF92611A3602AF000E910F /* DBManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		84CF92621A36032F000E910F /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		84CF92641A3603A8000E910F /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
@@ -98,6 +100,7 @@
 				8402912B1A2F6C1400AA7885 /* FeedItem.m */,
 				84AC5D381A430FA1002AE96C /* FeedItem.h */,
 				84AC5D371A430D10002AE96C /* FeedItemDetailedViewController.h */,
+				84AC5D391A431378002AE96C /* FeedItemDetailedViewController.m */,
 				840291081A2DD71600AA7885 /* ViewController.h */,
 				840291091A2DD71600AA7885 /* ViewController.m */,
 				840291271A2DDBC900AA7885 /* FeedParser.h */,
@@ -238,6 +241,7 @@
 			files = (
 				840291291A2DDF1D00AA7885 /* FeedParser.m in Sources */,
 				8402912C1A2F6C1400AA7885 /* FeedItem.m in Sources */,
+				84AC5D3A1A431378002AE96C /* FeedItemDetailedViewController.m in Sources */,
 				8402910A1A2DD71600AA7885 /* ViewController.m in Sources */,
 				84CF92631A36032F000E910F /* DBManager.m in Sources */,
 				840291071A2DD71600AA7885 /* AppDelegate.m in Sources */,

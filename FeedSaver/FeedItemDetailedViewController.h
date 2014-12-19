@@ -7,4 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import
+#import "FeedItem.h"
+
+@interface FeedItemDetailedViewController : UITableViewController
+
+@property(nonatomic,strong) FeedItem *item;
+
+@end

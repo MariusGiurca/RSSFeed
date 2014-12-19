@@ -9,6 +9,7 @@
 #import "ViewController.h"
 #import "DBManager.h"
 #import "FeedItem.h"
+#import "FeedItemDetailedViewController.h"
 
 @interface ViewController ()
 
@@ -81,8 +82,8 @@
 #pragma mark table view data source
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"newFriendCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newFriendCell"];
+    static NSString *CellIdentifier = @"feedTitleCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"feedTitleCell"];
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
@@ -112,12 +113,11 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     FeedItem *item =  [self.itemArray objectAtIndex:indexPath.row];
-    UIAlertView *messageAlert = [[UIAlertView alloc]
-                                 initWithTitle:item.title message:item.itemDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    FeedItemDetailedViewController *detailedViewController = [[FeedItemDetailedViewController alloc]initWithStyle:UITableViewStyleGrouped];
+    detailedViewController.item = item;
+    [self.navigationController pushViewController:detailedViewController animated:YES];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    
-    // Display Alert Message
-    [messageAlert show];
     
 }
 
