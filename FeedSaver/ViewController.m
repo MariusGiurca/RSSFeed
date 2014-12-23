@@ -35,11 +35,7 @@
     feedParser.delegate = self;
     [feedParser parse];
     
-    CGFloat x = 0;
-    CGFloat y = 50;
-    CGFloat width = self.view.frame.size.width;
-    CGFloat height = self.view.frame.size.height - 50;
-    CGRect tableFrame = CGRectMake(x, y, width, height);
+    CGRect tableFrame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     
     self.tableView = [[UITableView alloc] initWithFrame:tableFrame style: UITableViewStyleGrouped];
     self.tableView.dataSource = self;
@@ -50,13 +46,6 @@
     // Do any additional setup after loading the view, typically from a nib.
     self.itemArray = [[NSMutableArray alloc] init];
     [[DBManager getSharedInstance] readDBEntries:self.itemArray];
-    /*for(FeedItem *item in itemArray)
-    {
-        NSLog(@"Title: %@", item.title);
-        NSLog(@"link: %@", item.link);
-        NSLog(@"date:%@", item.date);
-        NSLog(@"description: %@", item.itemDescription);
-    }*/
     
 }
 
@@ -105,10 +94,10 @@
     return self.itemArray.count;
 }
 
-/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
-}*/
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

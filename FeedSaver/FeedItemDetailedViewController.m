@@ -48,6 +48,8 @@ typedef enum {
             case TitleSection:
                 cell.textLabel.text = [self.item.title length] ? self.item.title : @"No title";
                 cell.textLabel.font = [UIFont boldSystemFontOfSize:20];
+                cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+                cell.textLabel.numberOfLines = 3;
                 break;
             case LinkSection:
                 cell.textLabel.text = [self.item.link length] ? self.item.link : @"No link";
@@ -68,15 +70,18 @@ typedef enum {
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(indexPath.row == DescriptionSection) {
-        NSDictionary *attributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20]};
-        CGRect rect = [self.item.itemDescription boundingRectWithSize:self.tableView.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
-        //CGSize descriptionSize = [self.item.itemDescription sizeWithAttributes:attributes];
-        return rect.size.height+20;
+    NSString *sectionText = @"";
+    switch(indexPath.row) {
+        case DescriptionSection:
+            sectionText = self.item.itemDescription;
+            break;
+        case TitleSection:
+            sectionText = self.item.title;
+            break;
     }
-    else {
-        return 34;
-    }
+    NSDictionary *attributes = @{NSFontAttributeName:[UIFont boldSystemFontOfSize:20]};
+    CGRect rect = [sectionText boundingRectWithSize:self.tableView.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil];
+    return rect.size.height+20;
     
 }
 
