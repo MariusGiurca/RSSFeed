@@ -27,7 +27,7 @@ typedef enum {
 @end
 
 @interface FeedParser : NSObject <NSXMLParserDelegate> {
-    NSDateFormatter *dateFormatter;
+    NSDateFormatter *feedDateFormatter, *removeWeekdayFormatter;
 }
 
 @property (weak,nonatomic) id <FeedParserDelegate> delegate;

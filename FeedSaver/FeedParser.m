@@ -19,8 +19,11 @@
                                                                 cachePolicy:NSURLRequestReloadIgnoringLocalAndRemoteCacheData
                                                                 timeoutInterval:60];
         self.request = req;
-        dateFormatter = [[NSDateFormatter alloc] init];
-        [dateFormatter setDateFormat:@"EEE, d MMM yyyy HH:mm:ss Z"];
+        feedDateFormatter = [[NSDateFormatter alloc] init];
+        [feedDateFormatter setDateFormat:@"EEE, d MMM yyyy HH:mm:ss Z"];
+        
+        removeWeekdayFormatter = [[NSDateFormatter alloc] init];
+        [removeWeekdayFormatter setDateFormat:@"d MMM yyyy HH:mm:ss Z"];
     }
     return self;
 }
@@ -122,8 +125,8 @@
     }
     else if([self.currentPath isEqualToString:@"/rss/channel/item/pubDate"]) {
         //convert from format found in feed to format needed by sqlite
-        NSDate *tmpDate = [dateFormatter dateFromString:self.currentText];
-        self.currentItem.date = [dateFormatter stringFromDate:tmpDate];
+        NSDate *tmpDate = [feedDateFormatter dateFromString:self.currentText];
+        self.currentItem.date = [removeWeekdayFormatter stringFromDate:tmpDate];
         processed = YES;
         //NSLog(@"date:%@",self.currentItem.date);
     }
