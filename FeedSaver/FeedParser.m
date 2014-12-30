@@ -64,7 +64,7 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection*)connection {
     if(self.asyncData.length) {
-        NSLog(@"Read %d bytes of data", self.asyncData.length);
+        NSLog(@"Read %lu bytes of data", self.asyncData.length);
         NSXMLParser *newXMLParser = [[NSXMLParser alloc] initWithData:self.asyncData];
         self.XMLParser = newXMLParser;
         self.XMLParser.shouldProcessNamespaces = YES;

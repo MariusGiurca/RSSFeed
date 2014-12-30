@@ -75,7 +75,7 @@
     feedParser.delegate = self;
     [feedParser parse];
     [self updateTable];
-    [self.refreshControl endRefreshing]
+    [self.refreshControl endRefreshing]; 
     
     
 }
