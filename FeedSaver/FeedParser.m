@@ -37,31 +37,47 @@
 -(BOOL)parse {
     
     self.urlConnection = [[NSURLConnection alloc] initWithRequest:self.request delegate:self];
-    NSURLResponse *response = nil;
-    NSError *error = nil;
     if (self.urlConnection) {
-        NSData *data = [NSURLConnection sendSynchronousRequest:self.request returningResponse:&response error:&error];
-        if(data && !error) {
-            NSXMLParser *newXMLParser = [[NSXMLParser alloc] initWithData:data];
-            self.XMLParser = newXMLParser;
-            self.XMLParser.shouldProcessNamespaces = YES;
-            self.XMLParser.delegate = self;
-            [self.XMLParser parse];
+        self.asyncData = [[NSMutableData alloc] init];
+    }
+    else {
+        //inform delegate
+        if([self.delegate respondsToSelector:@selector(feedParser:didFailWithError:)]) {
+            NSError *error = [NSError errorWithDomain:FeedParserErrorDomain
+                                                 code:ConnectionFailed
+                                             userInfo:[NSDictionary dictionaryWithObject:@"Connection failed" forKey:NSLocalizedDescriptionKey]];
+            [self.delegate feedParser:self didFailWithError:error];
         }
-        else {
-            //inform delegate
-            if([self.delegate respondsToSelector:@selector(feedParser:didFailWithError:)]) {
-                NSError *error = [NSError errorWithDomain:FeedParserErrorDomain
-                                                     code:ConnectionFailed
-                                                 userInfo:[NSDictionary dictionaryWithObject:@"Connection failed" forKey:NSLocalizedDescriptionKey]];
-                [self.delegate feedParser:self didFailWithError:error];
-            }
-        }
-
     }
     
     return YES;
 }
+
+#pragma mark NSURLConnectionDataDelegate
+-(void)connection:(NSURLConnection*)connection didReceiveData:(NSData *)data {
+    [self.asyncData appendData:data];
+}
+
+-(void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse*)response {
+    [self.asyncData setLength:0];
+}
+
+-(void)connectionDidFinishLoading:(NSURLConnection*)connection {
+    if(self.asyncData.length) {
+        NSLog(@"Read %d bytes of data", self.asyncData.length);
+        NSXMLParser *newXMLParser = [[NSXMLParser alloc] initWithData:self.asyncData];
+        self.XMLParser = newXMLParser;
+        self.XMLParser.shouldProcessNamespaces = YES;
+        self.XMLParser.delegate = self;
+        [self.XMLParser parse];
+    }
+    
+}
+
+-(void)connection:(NSURLConnection*)connection didFailWithError:(NSError *)error {
+    [self.delegate feedParser:self didFailWithError:error];
+}
+
 
 #pragma mark NSXMLParserDelegate
 -(void)parserDidStartDocument:(NSXMLParser *)parser {

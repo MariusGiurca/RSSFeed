@@ -49,6 +49,13 @@
     
 }
 
+-(void)updateTable {
+    [[DBManager getSharedInstance] readDBEntries:self.itemArray];
+    self.tableView.userInteractionEnabled = YES;
+    [self.tableView reloadData];
+}
+
+
 #pragma mark -
 #pragma mark Feed Parser delegate
 -(void)feedParserDidStart:(FeedParser *)parser {
@@ -61,6 +68,7 @@
 
 -(void)feedParserDidFinish:(FeedParser *)parser {
     NSLog(@"done parsing url %@",[feedParser.url absoluteString]);
+    [self updateTable];
 }
 
 -(void)feedParser:(FeedParser *)parser didFailWithError:(NSError *)error {
