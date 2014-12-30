@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import "FeedParser.h"
 
-@interface ViewController : UIViewController <FeedParserDelegate, UITableViewDataSource,  UITableViewDelegate> {
+@interface ViewController : UITableViewController <FeedParserDelegate, UITableViewDataSource,  UITableViewDelegate> {
     FeedParser* feedParser;
 }
 
-@property (strong,nonatomic) UITableView *tableView;
+//@property (strong,nonatomic) UITableView *tableView;
 @property (strong,nonatomic) NSMutableArray *itemArray;
+@property (strong,nonatomic) UIRefreshControl *refreshControl;
 @end
 

@@ -41,7 +41,10 @@
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
     
-    [self.view addSubview:self.tableView];
+    //[self.view addSubview:self.tableView];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshFeeds) forControlEvents:UIControlEventValueChanged];
     
     // Do any additional setup after loading the view, typically from a nib.
     self.itemArray = [[NSMutableArray alloc] init];
@@ -50,9 +53,31 @@
 }
 
 -(void)updateTable {
+    
+    
     [[DBManager getSharedInstance] readDBEntries:self.itemArray];
     self.tableView.userInteractionEnabled = YES;
     [self.tableView reloadData];
+}
+
+-(void)refreshFeeds {
+    
+    NSURL *feedURL = [NSURL URLWithString:@"http://feeds.gpupdate.net/en/rss.xml"];
+    feedParser = [[FeedParser alloc] initWithURL:feedURL];
+    feedParser.delegate = self;
+    [feedParser parse];
+    feedURL = [NSURL URLWithString:@"http://techcrunch.com/feed"];
+    feedParser = [[FeedParser alloc] initWithURL:feedURL];
+    feedParser.delegate = self;
+    [feedParser parse];
+    feedURL = [NSURL URLWithString:@"http://rss.realitatea.net/stiri.xml"];
+    feedParser = [[FeedParser alloc] initWithURL:feedURL];
+    feedParser.delegate = self;
+    [feedParser parse];
+    [self updateTable];
+    [self.refreshControl endRefreshing]
+    
+    
 }
 
 
